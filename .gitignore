@@ -8,3 +8,7 @@ coverage
 web/node_modules
 web/dist
 .vercel
+artifacts-v2
+cache-v2
+artifacts-alt
+cache-alt

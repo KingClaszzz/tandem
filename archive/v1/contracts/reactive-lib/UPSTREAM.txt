@@ -1,0 +1,2 @@
+Vendored from https://github.com/Reactive-Network/reactive-lib-omni (src/) at commit:
+3ade0dcf1d27e67e5783ef807e73a1b9e0c0cce8 Thu May 21 12:24:28 2026 +0000

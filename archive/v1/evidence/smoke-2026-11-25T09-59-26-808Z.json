@@ -1,0 +1,145 @@
+{
+ "at": "2026-11-25T09:58:44.817Z",
+ "deployments": {
+  "reactive": {
+   "chain": "lasna",
+   "address": "0x99CabeF8D2598eb2F067704247943678bF262726",
+   "tx": "0x05747cf8f8a6a844318ce5841bbc212d970e01e269d41025b365f36204edec79"
+  },
+  "tWETH": {
+   "chain": "base",
+   "address": "0x99CabeF8D2598eb2F067704247943678bF262726",
+   "tx": "0x40b5298ecfa91f64211cab92e5b9a2324ac31d61d7642867292064324ff7f264"
+  },
+  "feed": {
+   "chain": "base",
+   "address": "0x0BA819E60Dbc79adad9F556982e09D3E7DbB6C4E",
+   "tx": "0xad05655effacfbd983434e7fa65f7a64450506dafe677f3d9cfc544e530e80dd"
+  },
+  "vault": {
+   "chain": "base",
+   "address": "0x4a1FbD0B69834428B7450EA4fC671A933f1e2c81",
+   "tx": "0x57e2e48f8e6992f3462bbccb4270ab55e26b7b3b323d95a381a986dea8a4dd9e"
+  },
+  "tUSD": {
+   "chain": "uni",
+   "address": "0x99CabeF8D2598eb2F067704247943678bF262726",
+   "tx": "0xfe264e0e8f1fd37892a9d74061d9e3ebb1ce8d0ccda886c4e6f4beddebab8c48"
+  },
+  "pool": {
+   "chain": "uni",
+   "address": "0x0BA819E60Dbc79adad9F556982e09D3E7DbB6C4E",
+   "tx": "0x9e92437dcd322a7e8fc22492158a169bd363129ab891d21e9fe6f68610a6e85f"
+  },
+  "_meta": {
+   "seeded": "0x28b879fdf37d39e5abde48a73923d098f0684af2ed04557df580d8ad06e30832",
+   "configured": "0xe03d4244ea6d3f33e9c316f408115f48a4a9fbe6015fda4922fc08eba140227e",
+   "deployedAt": "2026-11-25T09:57:53.520Z"
+  }
+ },
+ "borrow": {
+  "id": "1",
+  "lock": "0x77504d37b2baa99629814fc12441e1ba5a894f63b241481e421998ce23578fdf",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0xe33b06c415347f540765f1e6ca8e358f8c8e6cb21ed33bd91018f89325a28e25",
+    "ms": 1422.9984999999997
+   },
+   {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0xc48705ebed866ffccb3dbbabdf81ef1dfb3769efe0d8e57ad4976f634b171b20",
+    "ms": 3280.742
+   }
+  ]
+ },
+ "repay": {
+  "id": "1",
+  "repay": "0x61b26dc0624d4edf738866d5124f3534aa2676d4e8fcbeeb4213c518edab5a14",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "ReleaseRequested",
+    "hash": "0xb407b4d92c30c733e52bc4772435d65fa1ddb8f8df2c2569d160b435086122cf",
+    "ms": 1728.9231
+   },
+   {
+    "chain": "base",
+    "event": "CollateralReleased",
+    "hash": "0xdfc57eb820508b70be6465e7f5b928092cdc0747165d7f3e54dba3d5818f3345",
+    "ms": 2018.6309
+   }
+  ]
+ },
+ "refused": {
+  "id": "2",
+  "lock": "0x91bc6eb6bc9811dbf4b9d2849c756316adcd99114f452ac4cc008b9f2b278714",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "BorrowRefused",
+    "hash": "0x2a90b236423a1fa513769907960c027c8a447693cf8aa2f011caf3fbca81d040",
+    "ms": 1868.7055
+   },
+   {
+    "chain": "base",
+    "event": "CollateralReleased",
+    "hash": "0x111eaf8c5e59b50a69b854987f0b8a8045e410b0ded01528e804a454a72524b6",
+    "ms": 2162.783900000002
+   }
+  ]
+ },
+ "liquidation": {
+  "borrow": {
+   "id": "3",
+   "lock": "0x3208fffcde985de3a78f60a8c94197a8c16b5da87937fe7752ac9d5b163253a9",
+   "steps": [
+    {
+     "chain": "lasna",
+     "event": "BorrowApproved",
+     "hash": "0x05ab75dd0e42c580ffdd288bde16c85260b0ce847df6ba1a796a1ce0fc04dfc8",
+     "ms": 1460.1427000000003
+    },
+    {
+     "chain": "uni",
+     "event": "Disbursed",
+     "hash": "0x42e51cc8f6cb87adf524794d1e28968df331a929910dae692aea8d9044a46eb6",
+     "ms": 4098.063900000001
+    }
+   ]
+  },
+  "price": "0xae97cd6070e69c609e1adfc08307d4cb2ef1d58129b8e4f32e21ba835ff520dd",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0x4e36ee5a0200e13b67c724bb7317cf1e8789251c1a81548ed6acf952bbc09cf1",
+    "ms": 1767.3317000000025
+   },
+   {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x7645d4f5e8d2ac6bb9258f6d1f51a465e8c1e937bd69a33f160d05703baabc6c",
+    "ms": 3595.8984000000055
+   },
+   {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x9de327bed7378e067a3e5720ebba770a0be2d8d8209f3f16f9b0f778f395069f",
+    "ms": 3973.9910999999993
+   },
+   {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x241c2f6ce8074d4644072422096f48d548289a2b17696a8c2ced3baf306b64a1",
+    "ms": 4265.916000000005
+   }
+  ]
+ },
+ "rcFinalStatus": {
+  "1": 6,
+  "3": 7
+ }
+}

@@ -1,1 +1,662 @@
-{}
+{
+ "measuredAt": "2026-11-26",
+ "runs": [
+  {
+   "loan": 4,
+   "lock": "0x75bb88723345c9233501804312e784abc6c3a64731d9845fadc4291d4fc3663d",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x953196177b026113b61167bfdc4eae66a1f25c6a2e8e40e3709fb18448f8f230",
+    "ms": 1788.21
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0xde6e5666d8080533ae2a204f737c371d2defb16883d88479cf434aebc59c5e27",
+    "ms": 3616.3968000000004
+   },
+   "price": "0xbcb93f5ca48da31ba9d7a56bc59c8566a8eaafd82812e83791947788953d1761",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xf5645c084aa91be721f9f3d9c8ae673b77c4c9495fc3b44e0ae37ef48adcf07b",
+    "ms": 1863.368699999999
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x10facc6b3b1f5296e959ec24f51442b2f90985fa8bb2efe7156927039b769094",
+    "ms": 4180.470800000001
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x82bbf40b785526618e6c5c0fe426ec6a3ef010e6a8e22fcc1e772bd7d0d64d94",
+    "ms": 4609.190199999999
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x076e63cee1c0db702c07c88a2770d646bf513ae8ec26d54a683fd178d2190a8b",
+    "ms": 4891.636499999999
+   }
+  },
+  {
+   "loan": 5,
+   "lock": "0xc493b874f44f95aad26da678435fd663928b116c5a4823bb0263fe831c3e6f54",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0xfbb70c6f2f0e31bc8b0ba67217f7299388f13e881c74068ef8dd10ca4366c9b0",
+    "ms": 1091.3977999999988
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0xfc52d1cfbdcefdee1b66596e894d235aff7aae2797fd5f200c91887e1dd80956",
+    "ms": 2392.715600000003
+   },
+   "price": "0x61ffac0594262e9621c1d735791b2be45ce296eab2bfeb156be3ec6ec1cf120d",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xa89b079a45c280439dd04e60f2f39a04671da65452b870967d33c1e59b7f35bb",
+    "ms": 1471.945200000002
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x77c8c3ad49464fc1b8d52af8923edfc0831a87b31fb92b48f9d26dcaab8680b3",
+    "ms": 2765.0060999999987
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0xb7d5f234f2914fa66afa418f389365e15c9c773e2f1745d840af5d5dca9fd87c",
+    "ms": 3174.05339999999
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x9e9fe8f80f20a7a9b104430ac2f93d6f3489667720277f94314f61335f77f746",
+    "ms": 3459.7362999999896
+   }
+  },
+  {
+   "loan": 6,
+   "lock": "0x046b4343079242c204efe545aa0ca17a5cfc2432da5e9fbb61f6ab6b9b913c79",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x4ccb7503723d37ff43a85e20f4558b3c5ceb432b7af21360cc6cb996579e1fe7",
+    "ms": 1036.7591000000102
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0xb0f705a7e4e673d2cc0fde126ba41c4dc201609e12d9963a9d692723293363fa",
+    "ms": 2456.1540999999997
+   },
+   "price": "0xf8b1807cea2e03a5974d503d148e519a74af74f3aa2cb665ca232e0ef8c69aca",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0x31275bb49fa1083778ab361b648afc1df32dbd105a794c95e40df145536294e6",
+    "ms": 1456.135100000014
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0xf4744c6554dc0795701393425b06c3e1445ac9076d8e6b02241bfcb6f2994ad2",
+    "ms": 3266.156099999993
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x8d1752b86763e20a9a17aba04ab02d3c1e2343396c4e6de7df1a94a4afe986ad",
+    "ms": 3640.5530000000144
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x79efa5af156a2d5f2bdb000ac76e2963d75c6105cc0e6027a80374ec0f564159",
+    "ms": 3917.758200000011
+   }
+  },
+  {
+   "loan": 7,
+   "lock": "0xd8d6ff0e51e7037080c18b617e52d0010934ce217bd094a64c8ea7cda2bc25b9",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0xfc710ed68fb3fb7419560ca8e1a000b68cee4121e70cf0cd587243205359d053",
+    "ms": 1060.4595000000263
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x08693ac34c3ee2eb338ae470aea3325f319c5b48efe605074e6a8e1e0d9da4ed",
+    "ms": 2376.5907000000007
+   },
+   "price": "0x5c6254fda4191cd4a933cab67d60f1f1b8e9d38a6055c7ddb51907a9a4ea5356",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xf9c4fe7ca374587e9037ad7597a89425c58e410533974d5215f18dce579fbda5",
+    "ms": 1448.013500000001
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x1797dccd94efc00068414701afe6a2f9eef5642a24494108491f887b58656114",
+    "ms": 2727.609599999996
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0xca1154f6bab510c85b393dc85c23ee5006d11fc17523c0f3ec853da45c75e8b3",
+    "ms": 3140.0743000000075
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0xbe1d9db9dd4b783a1d82b037a900e92068a8693f2290deac8a1e1a00ced25cae",
+    "ms": 3445.9223000000056
+   }
+  },
+  {
+   "loan": 8,
+   "lock": "0x9e7494c67d7846671a9eff445ffbd652d55f0b633c6cb82afe512410b6884688",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x1902c8771332a9966b79e9f1e22393397a1d81c5f488875acdeb70aa7561075f",
+    "ms": 1106.2419000000227
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x0409bbe9c94f4de84bcb7e4760a0af908f11601d5c1ea7f00c7ab2e73864080e",
+    "ms": 2913.9096000000136
+   },
+   "price": "0x9100d84af92f496eabc3a98a9c1e2689b21682c8c61cebe008d2e11446e1d8f1",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0x241ef9b8c57660b0dc172e4595b8b9f949aacd74105a27a44beecdee7f4ba771",
+    "ms": 1646.6562999999733
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0xc3401dfccd07dfe5a75fa8e90738a39d50ac95dfdbd88785f56e744c45d3bbae",
+    "ms": 2469.8002999999444
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0xe326ab0919bdf4420c6015843172eabd9a5a56e0b37af6a350b36daa6b148ea4",
+    "ms": 3519.5746999999974
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x2cc53e0c10edc5eb9d0e874ee1a39d3d3f51a4efd1debfb6aed1430d15124e6d",
+    "ms": 3807.242799999949
+   }
+  },
+  {
+   "loan": 9,
+   "lock": "0x26d02223415f49b14f5d96cbff3ddce1abb36953100baaa831915329542a9cf0",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x837f43bb943082d45f810c9fed26ab85eb10e66024b90ce0210290cd2b9b06f2",
+    "ms": 1682.2417999999598
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x3a466dbca6dffc87a5ee9bf908350dc642dc42b8f13f879b2c1efcd387ab7354",
+    "ms": 3563.7354999999516
+   },
+   "price": "0xbc302f0406bfdec35ba9525c36832cb3fc2196ee6491175bfb9e227bb55455a5",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xc5cea97e741a57c84ab8ffd5c060f3b7f7dfea01f9f58fcdbf7c077f8b95f992",
+    "ms": 1464.0041000000201
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0xec50781078a6ac39bc2397f065d216b21b26c0c540a2edd223fb08d68c8d1435",
+    "ms": 3243.4812000000384
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x046a4b02cc11544eed9556231c48d9fd30f8e536b459974a555c6d8447f52f7f",
+    "ms": 3615.077800000028
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x93fffa0f36903455c7755ab34d93402c9988136ff16c559db8bba93c89af93fc",
+    "ms": 3893.3195000000414
+   }
+  },
+  {
+   "loan": 10,
+   "lock": "0xb1ab56c373133177e92628ef23865cca381df16ea61c19b995d3715e06c859d1",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x828d20ff7870b675923ee0c93af94bdbc9e3befe608a57b1971b906a4c0533d3",
+    "ms": 1093.7971000000252
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x4fbe22e8c98f98e2d5001f51b70ff7d2eddeb4ec2bd2c209f0f10cadad70222b",
+    "ms": 3451.5485000000335
+   },
+   "price": "0xf5a62fedd161e52a1ce851c8cc84131f7144939339914f2a2a9408917428fb58",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xff540d797c6d7ee7f2bb74909717b5363340c4fdc2efc95d1c6dafa310013e3b",
+    "ms": 1420.7300999999861
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0xacbdb219e301649f2b280caaf275ee51db03ea144b5c2f17e65be0775f78a712",
+    "ms": 2697.403099999996
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x94d0836ab7029419d0c0f2bf235bf153cfbc7cd3e09cc317321ea13dc4338303",
+    "ms": 3080.3489999999874
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x4490b95e96597bac81bdfcba6a831a925aa7c148efcb044178d11ad7b6b64c3c",
+    "ms": 3366.318900000013
+   }
+  },
+  {
+   "loan": 11,
+   "lock": "0x541ab34c96541fa47308253cb8b08b0313e72a897dc91397af4e7524225e4ea0",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x2ffcb9e59be7e7e074bb3e56f3be3f75485b4721d40d7ce6fe466d4fc29e2519",
+    "ms": 1082.4643000000506
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x4fb03a3dd3d6ebec6e698c8c7b0110afe23d5e03d7f202c97767dfc4ce7ff63f",
+    "ms": 3425.1358000000473
+   },
+   "price": "0x425829ecb3393c286d59592d95f693362cc0452769d116ecce72453a2696c4ba",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xf5aa34bf85b012aaf957f053bc795c3a889fcbf6786e3640a3af45b110b056db",
+    "ms": 2092.9340000000084
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x426c8b3840b3214ee3548fbe77223c2c023d5c24ca809e3b35c0b0dac5150333",
+    "ms": 3409.9071000000113
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x950415b7a1d28a67d45e9deebfedcb58c93fbcec8c19728769f4d2cde0b8e5bd",
+    "ms": 3774.036599999992
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x7550a9606639d38c72aa1b5d93aeea6ef3489960acc4373cbef5a2aff13d2775",
+    "ms": 4054.9769000000088
+   }
+  },
+  {
+   "loan": 12,
+   "lock": "0x0efdec92ecf20e800bdd416b8216959675cd26d207485a4b691ec28a54def2b6",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x6d4be4504124a2f4cc5c24cf825a2995eed59150528756dbc2dcbd16b45b2d07",
+    "ms": 1813.982799999998
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0xda098b2c40eb2618897c7da029e2bb4c3e14583afb2ba13624d8f5cf802492dc",
+    "ms": 3111.941700000025
+   },
+   "price": "0x18074a9885937820a4a3f9d890c44d3ebbc83e59e5713269715d11c998f52069",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0x2327181089050f190a4cd55b067d686785c857280e7cf4018dfd2a6421fc704f",
+    "ms": 1536.2458000000333
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x4f618c5ff978d4cc6ef95c4e264a1d113bec29eee74e9ccde024688d1626f311",
+    "ms": 3325.7294000000693
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0xe4410cd9095fbc0bdb17da9e31a237d8bfb9e3b033ec07604fca8cbfb1dcdfae",
+    "ms": 3765.997100000037
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x27ed8c054d8040840cceaf3b87b08463749805695f4ce9fb76179e9a69f6396f",
+    "ms": 4036.4071000000695
+   }
+  },
+  {
+   "loan": 13,
+   "lock": "0x6a835d545a5f6c28e1e3ffa13e7807602db75237917c8507bf8867ca581bd6fb",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0xa0db378f548a6aef618a341e66940555df6c2a3e6b343b3f3a1746e9053bd271",
+    "ms": 1803.2863999999827
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x5efa97a42f49610644712adb27fb96f206744b8c0e3c6b63310542196afc0bcc",
+    "ms": 3106.9451000000117
+   },
+   "price": "0x82851c831192d9bc176b6526ea3b9ff2586d438c29225c9c2c41a8790f8af828",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xf9726eee347a8e07d1ede7f54cb3ce80ef8d0be97310f3ba3b0d7328af605673",
+    "ms": 1503.93479999993
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x9c43c82d199ff23c1f3075dd554f3354c0f868086524460bab34d3c867ad370c",
+    "ms": 2777.3852999999654
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0xdec5dff23edc99ca061e1c29a8eea0882020f47d5a93002ee37c33fc7516c74f",
+    "ms": 3155.60289999994
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x8ab698a87f3d00625cb1be1927a1b7c64627f8530f24017146fc64f9ef7a856f",
+    "ms": 3447.7916999999434
+   }
+  },
+  {
+   "loan": 14,
+   "lock": "0xc5cfda61551c1ce36859da41b146226cf7c4dde9af4f706cea3793f8d6d34de5",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x0e471f9257245aaf74247f5cc3d4d417a63e3e2e7d638678b3ec1240f6a47748",
+    "ms": 414.84250000002794
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0xc1066b4f1581d6148f0363de11999b60ef05ce1c4bef5fb93152741fae631ff8",
+    "ms": 2748.518999999971
+   },
+   "price": "0x000ae6c9f593acf0879343585bb1838bac5cb5d8a2ee870e5a9835407c7ba43f",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xc0ab8b3d0f81a4061675d8e01a3f57ecce5e58e221f46fc33c902a509c59c62c",
+    "ms": 1523.3846999999369
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x3abdd87d998b9987d9f78325bd2ac56ac4398474ff137f62025393e22407a813",
+    "ms": 2781.6448999999557
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x2877f5d628abb402cbfa64f9393158030bb9fecc822505508cce3738f34fc832",
+    "ms": 3215.121599999955
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0xa5585022be796a24135ebde0bc95b402761a82a42c1f221309d11a5004ca64c8",
+    "ms": 3496.189999999944
+   }
+  },
+  {
+   "loan": 15,
+   "lock": "0x4ea89ab1f5e0c7b83a3e7f3c129dd0b468348ffb34b317aadc43c532141e3372",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0xd8f4e493a037c3844e4c2535d97298fbbb9fca867fcc32443683650eaf2f0128",
+    "ms": 1242.637299999944
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x2bce64602932e58923fb4335874c7405bcfb6bd1df583f91401517ef7909f41d",
+    "ms": 2538.4231000000145
+   },
+   "price": "0x45e1277db5331b6cc254b854e84fe241f338f09f09dae6f108145cc1f3fb6c5e",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xb1a8735b31d0a673790d4f8f8a0d3509aa836d25eace6cca5e4f9aa49278fabe",
+    "ms": 1412.4054999999935
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x628c51427ab0eada5c1aa5a803eebd2a7edad3acbeca2182250173068e4d84bd",
+    "ms": 3183.7883000000147
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x96b5c5a1015620553ef53170b7d78df602bc51451b159b3b65369cae01d39299",
+    "ms": 3551.810199999949
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x4e347a42be4e95f439bf928eb76593af66c0799a384ee3a1b10b501e8cb7dedb",
+    "ms": 3837.7247000000207
+   }
+  },
+  {
+   "loan": 16,
+   "lock": "0xa724d7c3897ece6c1a59ea762109078de003372368b2937c1fc93fdb5a7ed0c1",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x690d6d2409edc9384416d9b24a9f24d72c4fd0474fe7e87a1ef170bf4919a44f",
+    "ms": 1786.6342000000877
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x453fcf99b830c345eca21083e84d2e99f27d5216dd11146e3bed7396cf3589d3",
+    "ms": 3077.1940000000177
+   },
+   "price": "0x0e3f1b1a814cfda1227b391d4baa362e256931798e6d732ae3c0a008e21dc39f",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xca73fdb830bec962943815e2ad0d4938acb4ab7445baf86946bd3254a3e43ad9",
+    "ms": 1543.3493000000017
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x3676d471d2fa61726b50498e7c311de951a1a784603eccfe625d2dacf1b0bdda",
+    "ms": 3340.449600000051
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0xc38cf6a2fc10b42c4d2f7ca6e82218774f336075d087ece845bdf8d36a26ec93",
+    "ms": 3774.5261000000173
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x4b5d70932a3833681217b7076e690e78a8cc90448e3a10ce573656a48c72750a",
+    "ms": 4063.6526000000304
+   }
+  },
+  {
+   "loan": 17,
+   "lock": "0xe7bdd6faea3bcc9cd11caa2ed61a04ac202d72b04a8eab58f5f9f254d9c7bf65",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0xaa4e140bab4a0582c0a65b20f1b13dfdc4f34e7af25c3d28cc8082124b178481",
+    "ms": 383.13510000007227
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x4ecade3df2d5f5fda4790437172ee1bd92005bc910554b5a83dae2e33526bf99",
+    "ms": 2239.951699999976
+   },
+   "price": "0x739e63d9d1a64234149304eccf83d042852c11205d9f58ed5600d07f183eefb2",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0xc09c6d7a603a327813cb8402cd930c7d5e1631bd5addb824b2117fba20e35730",
+    "ms": 1411.8366999999853
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0xa719e6dd2c6abdbe00fc36c7fe7c1f779b1e1b0334cf60da5f26eb83b8701bd6",
+    "ms": 3200.7961999999825
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x7f8f5108378917874c8afdcf8b65e030f8f605aa5418f45a0aab8409e37e07ea",
+    "ms": 3611.868699999992
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x6c62197158db04d2e948e68f6f0d6c977c40394bcb1f16599723f89de3e9f9b9",
+    "ms": 3893.968499999959
+   }
+  },
+  {
+   "loan": 18,
+   "lock": "0xbc2b27e1024dd38333832efd50682fed6a888951c60eb415a251b1274995439f",
+   "approved": {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x04a04e6c96edd6e52ef983d507f979097e4027a321a7d0d38b8efec88a6ab313",
+    "ms": 1140.0049000000581
+   },
+   "disbursed": {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x9d580c4c78606a3897aaca84598ad60fff116d69232a64695da2003d8c07cb33",
+    "ms": 2980.98609999998
+   },
+   "price": "0x499caa6e68b8f13bedd92d2d03442be31f7f70ead66e056f0da5a51defdc2e71",
+   "requested": {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0x64aeed2d551fc72f5623d79729a8018e52aeb06a807799f07d9b248749192e8a",
+    "ms": 1458.2564999999013
+   },
+   "liquidated": {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0xfa211beb05d5243095ab126c9c807af6c7ae8b33448655aa57e328a40e05c0b6",
+    "ms": 3268.950499999919
+   },
+   "seizeRequested": {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x3ce26312ae76d86989bfcddf8bfb71d5300ae42371fd54fa1827d60c03c9044c",
+    "ms": 3680.156699999934
+   },
+   "seized": {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x6e0390b1f927bf4353728a81fb59d3285b7d4d92696273b48f667d106158bfa1",
+    "ms": 3967.893299999996
+   }
+  }
+ ],
+ "method": "wall-clock from the origin tx receipt to the first sighting of each event, polling public RPCs every 250 ms",
+ "hops": [
+  {
+   "name": "Base price tx → Reactive react()",
+   "p50": 1472,
+   "p95": 2093,
+   "max": 2093
+  },
+  {
+   "name": "Reactive → Unichain liquidate()",
+   "p50": 1771,
+   "p95": 2317,
+   "max": 2317
+  },
+  {
+   "name": "Unichain → Reactive react()",
+   "p50": 411,
+   "p95": 1050,
+   "max": 1050
+  },
+  {
+   "name": "Reactive → Base seize()",
+   "p50": 286,
+   "p95": 306,
+   "max": 306
+  }
+ ],
+ "total": {
+  "p50": 3893,
+  "p95": 4892,
+  "max": 4892
+ },
+ "crashToDebtClosed": {
+  "p50": 3201,
+  "p95": 4180,
+  "max": 4180
+ },
+ "borrow": {
+  "p50": 2981,
+  "p95": 3616,
+  "max": 3616
+ }
+}

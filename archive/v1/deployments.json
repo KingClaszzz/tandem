@@ -1,0 +1,37 @@
+{
+  "reactive": {
+    "chain": "lasna",
+    "address": "0x99CabeF8D2598eb2F067704247943678bF262726",
+    "tx": "0x05747cf8f8a6a844318ce5841bbc212d970e01e269d41025b365f36204edec79"
+  },
+  "tWETH": {
+    "chain": "base",
+    "address": "0x99CabeF8D2598eb2F067704247943678bF262726",
+    "tx": "0x40b5298ecfa91f64211cab92e5b9a2324ac31d61d7642867292064324ff7f264"
+  },
+  "feed": {
+    "chain": "base",
+    "address": "0x0BA819E60Dbc79adad9F556982e09D3E7DbB6C4E",
+    "tx": "0xad05655effacfbd983434e7fa65f7a64450506dafe677f3d9cfc544e530e80dd"
+  },
+  "vault": {
+    "chain": "base",
+    "address": "0x4a1FbD0B69834428B7450EA4fC671A933f1e2c81",
+    "tx": "0x57e2e48f8e6992f3462bbccb4270ab55e26b7b3b323d95a381a986dea8a4dd9e"
+  },
+  "tUSD": {
+    "chain": "uni",
+    "address": "0x99CabeF8D2598eb2F067704247943678bF262726",
+    "tx": "0xfe264e0e8f1fd37892a9d74061d9e3ebb1ce8d0ccda886c4e6f4beddebab8c48"
+  },
+  "pool": {
+    "chain": "uni",
+    "address": "0x0BA819E60Dbc79adad9F556982e09D3E7DbB6C4E",
+    "tx": "0x9e92437dcd322a7e8fc22492158a169bd363129ab891d21e9fe6f68610a6e85f"
+  },
+  "_meta": {
+    "seeded": "0x28b879fdf37d39e5abde48a73923d098f0684af2ed04557df580d8ad06e30832",
+    "configured": "0xe03d4244ea6d3f33e9c316f408115f48a4a9fbe6015fda4922fc08eba140227e",
+    "deployedAt": "2026-11-25T09:57:53.520Z"
+  }
+}

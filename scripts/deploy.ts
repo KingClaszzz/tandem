@@ -5,8 +5,9 @@ import { CALLBACK_PROXY, CHAINS, ChainKey, artifact, link, loadDeployments, save
 
 const E18 = 10n ** 18n;
 const INITIAL_PRICE = 3000n * 10n ** 8n;
-const RC_FUNDING = ethers.parseEther(process.env.RC_FUNDING ?? "2"); // lREACT
-const CB_FUNDING = ethers.parseEther(process.env.CB_FUNDING ?? "0.005"); // ETH per destination contract
+const RC_FUNDING = ethers.parseEther(process.env.RC_FUNDING ?? "1.5"); // lREACT; the rest stays in the wallet for top-ups
+const VAULT_FUNDING = ethers.parseEther(process.env.VAULT_FUNDING ?? "0.002"); // Base ETH for callbacks
+const POOL_FUNDING = ethers.parseEther(process.env.POOL_FUNDING ?? "0.004"); // Unichain ETH for callbacks
 
 const d = loadDeployments();
 
@@ -34,9 +35,9 @@ async function main() {
   const rc = await deploy("reactive", "lasna", "TandemReactive", [CHAINS.base.id, CHAINS.uni.id], RC_FUNDING);
   const weth = await deploy("tWETH", "base", "TestToken", ["Tandem Test WETH", "tWETH", 18, 2n * E18, 0]);
   const feed = await deploy("feed", "base", "PriceFeed", [INITIAL_PRICE]);
-  const vault = await deploy("vault", "base", "CollateralVault", [CALLBACK_PROXY.base, rc, weth, me], CB_FUNDING);
+  const vault = await deploy("vault", "base", "CollateralVault", [CALLBACK_PROXY.base, rc, weth, me], VAULT_FUNDING);
   const usd = await deploy("tUSD", "uni", "TestToken", ["Tandem Test USD", "tUSD", 6, 1000n * 10n ** 6n, 1_000_000n * 10n ** 6n]);
-  const pool = await deploy("pool", "uni", "LendingPool", [CALLBACK_PROXY.uni, rc, usd], CB_FUNDING);
+  const pool = await deploy("pool", "uni", "LendingPool", [CALLBACK_PROXY.uni, rc, usd], POOL_FUNDING);
 
   if (!d._meta?.seeded) {
     const token = new ethers.Contract(usd, artifact("TestToken").abi, wallet("uni"));

@@ -1,0 +1,267 @@
+{
+ "code": [
+  {
+   "id": "subscribe",
+   "tab": "Subscribe",
+   "title": "Listen to eight events on two chains",
+   "lead": "The reactive contract is wired once. After that, a matching log on any of the three contracts calls react().",
+   "contract": "TandemReactive",
+   "file": "contracts/TandemReactive.sol",
+   "from": 92,
+   "to": 111,
+   "text": "/// @notice One-time wiring. The vault and pool need this contract's address as their only\r\n/// callback sender, so they are deployed after it. The owner has no other power.\r\nfunction configure(address feed_, address vault_, address pool_, uint256 initialPrice) external {\r\n    if (msg.sender != owner) revert NotOwner();\r\n    if (feed != address(0)) revert AlreadyConfigured();\r\n    feed = feed_;\r\n    vault = vault_;\r\n    pool = pool_;\r\n    price = initialPrice;\r\n\r\n    _sub(collateralChainId, feed_, ANSWER_UPDATED);\r\n    _sub(collateralChainId, vault_, COLLATERAL_LOCKED);\r\n    _sub(collateralChainId, vault_, COLLATERAL_RELEASED);\r\n    _sub(collateralChainId, vault_, COLLATERAL_SEIZED);\r\n    _sub(debtChainId, pool_, DISBURSED);\r\n    _sub(debtChainId, pool_, BORROW_REJECTED);\r\n    _sub(debtChainId, pool_, REPAID);\r\n    _sub(debtChainId, pool_, LIQUIDATED);\r\n    emit Configured(feed_, vault_, pool_, initialPrice);\r\n}\r\n\nfunction _sub(uint256 chainId, address target, uint256 topic0) internal {\r\n    SYSTEM.subscribe(chainId, target, topic0, REACTIVE_IGNORE, REACTIVE_IGNORE, REACTIVE_IGNORE);\r\n}\r",
+   "notes": [
+    {
+     "line": 4,
+     "text": "One-time wiring. The owner can call this once and has no other power over the system."
+    },
+    {
+     "line": 10,
+     "text": "Subscribes to the price feed's AnswerUpdated on Base."
+    },
+    {
+     "line": 17,
+     "text": "Each destination is confirmed by an event, so a loan is only final when the other chain says so."
+    },
+    {
+     "line": 22,
+     "text": "Reactive Omni's system contract. Subscribing from a function, not the constructor, works: the vault and pool need this contract's address first."
+    }
+   ]
+  },
+  {
+   "id": "react",
+   "tab": "React",
+   "title": "One entry point for every event",
+   "lead": "Reactive calls react() with the log. The contract checks which chain and which contract it came from before doing anything.",
+   "contract": "TandemReactive",
+   "file": "contracts/TandemReactive.sol",
+   "from": 115,
+   "to": 138,
+   "text": "function react(LogRecord calldata log) external onlySystem {\r\n    uint256 t = log.topic0;\r\n    if (log.chainId == collateralChainId) {\r\n        if (log.contractAddress == feed) {\r\n            if (t == ANSWER_UPDATED) _onAnswer(int256(log.topic1), log.topic2);\r\n        } else if (log.contractAddress == vault) {\r\n            uint256 id = log.topic1;\r\n            if (t == COLLATERAL_LOCKED) {\r\n                (uint256 collateral, uint256 borrow) = abi.decode(log.data, (uint256, uint256));\r\n                _onLocked(id, address(uint160(log.topic2)), collateral, borrow);\r\n            } else if (t == COLLATERAL_RELEASED) {\r\n                _finalize(id, Status.Releasing, Status.Released);\r\n            } else if (t == COLLATERAL_SEIZED) {\r\n                _finalize(id, Status.Seizing, Status.Seized);\r\n            }\r\n        }\r\n    } else if (log.chainId == debtChainId && log.contractAddress == pool) {\r\n        uint256 id = log.topic1;\r\n        if (t == DISBURSED) _onDisbursed(id);\r\n        else if (t == BORROW_REJECTED) _onRejected(id);\r\n        else if (t == REPAID) _onRepaid(id);\r\n        else if (t == LIQUIDATED) _onLiquidated(id);\r\n    }\r\n}\r",
+   "notes": [
+    {
+     "line": 0,
+     "text": "Only Reactive's system contract can call this."
+    },
+    {
+     "line": 3,
+     "text": "A look-alike contract emitting the same event is ignored: the chain id and the exact address are checked."
+    },
+    {
+     "line": 4,
+     "text": "A new price. This is where unhealthy loans are found."
+    },
+    {
+     "line": 9,
+     "text": "A new loan. The size, the loan count and the LTV are checked here, at the price Reactive last saw."
+    },
+    {
+     "line": 21,
+     "text": "The debt chain confirmed the liquidation. Only now is the seize requested."
+    }
+   ]
+  },
+  {
+   "id": "liquidate",
+   "tab": "Liquidate",
+   "title": "Find unhealthy loans, ask Unichain to close them",
+   "lead": "On every price update the reactive contract walks its open loans and sends one callback per loan that crossed 80%.",
+   "contract": "TandemReactive",
+   "file": "contracts/TandemReactive.sol",
+   "from": 157,
+   "to": 172,
+   "text": "function _onAnswer(int256 answer, uint256 round) internal {\r\n    if (round <= lastRound || answer <= 0) return; // replayed, out of order or invalid\r\n    lastRound = round;\r\n    uint256 p = uint256(answer);\r\n    price = p;\r\n    emit PriceSeen(round, p);\r\n    uint256 budget = MAX_LIQ_PER_SWEEP;\r\n    for (uint256 i = active.length; i > 0 && budget > 0; i--) {\r\n        uint256 id = active[i - 1];\r\n        Loan storage l = loans[id];\r\n        if (l.status == Status.Active && !_healthy(l.collateral, l.debt, p, LIQ_THRESHOLD_BPS)) {\r\n            _startLiquidation(id, l);\r\n            budget--;\r\n        }\r\n    }\r\n}\r\n\nfunction _callback(uint256 chainId, address target, bytes memory payload) internal {\r\n    SYSTEM.requestCallbackV_1_0(\r\n        ISystemContract.CallbackConfiguration_V_1_0({ chainId: chainId, recipient: target, gasLimit: CALLBACK_GAS, payload: payload })\r\n    );\r\n}\r",
+   "notes": [
+    {
+     "line": 1,
+     "text": "Replayed or out-of-order rounds are ignored."
+    },
+    {
+     "line": 6,
+     "text": "At most 10 liquidations per update, so one reactive transaction stays under the 900k gas cap."
+    },
+    {
+     "line": 11,
+     "text": "Marks the loan Liquidating and requests liquidate() on Unichain."
+    },
+    {
+     "line": 18,
+     "text": "The callback. Unichain's proxy accepts it only from this contract, and the first argument is replaced with this contract's address."
+    }
+   ]
+  },
+  {
+   "id": "guard",
+   "tab": "Guard",
+   "title": "Only Reactive can move the collateral",
+   "lead": "The vault holds the borrower's tWETH. It has no owner key that can seize it.",
+   "contract": "CollateralVault",
+   "file": "contracts/CollateralVault.sol",
+   "from": 75,
+   "to": 87,
+   "text": "/// @dev Callback: the loan was liquidated on the debt chain. `amount` (debt + penalty, priced by\r\n/// the reactive contract) goes to the treasury; the rest goes back to the borrower.\r\nfunction seize(address sender, uint256 loanId, uint256 amount) external onlyServiceProvider onlyCallbackSender(sender) {\r\n    Loan storage l = loans[loanId];\r\n    if (l.status != Status.Locked) return;\r\n    l.status = Status.Seized;\r\n    _unlock(l.owner);\r\n    uint256 seized = amount < l.collateral ? amount : l.collateral;\r\n    uint256 returned = l.collateral - seized;\r\n    if (seized > 0) collateralToken.safeTransfer(treasury, seized);\r\n    if (returned > 0) collateralToken.safeTransfer(l.owner, returned);\r\n    emit CollateralSeized(loanId, l.owner, seized, returned);\r\n}\r",
+   "notes": [
+    {
+     "line": 2,
+     "text": "The caller must be Base's callback proxy."
+    },
+    {
+     "line": 2,
+     "text": "The proxy reports which reactive contract sent it. Anyone else is rejected."
+    },
+    {
+     "line": 4,
+     "text": "Idempotent: a duplicate or late callback does nothing, so retries are safe."
+    },
+    {
+     "line": 6,
+     "text": "Frees one of the borrower's three loan slots."
+    },
+    {
+     "line": 8,
+     "text": "Whatever collateral is left after debt plus the 5% penalty goes back to the borrower."
+    }
+   ]
+  },
+  {
+   "id": "order",
+   "tab": "Order",
+   "title": "The debt chain closes first",
+   "lead": "Repay and liquidate both change the loan's state on Unichain, so exactly one of them can win.",
+   "contract": "LendingPool",
+   "file": "contracts/LendingPool.sol",
+   "from": 60,
+   "to": 67,
+   "text": "/// @notice Repay a loan in full. Anyone may repay on the borrower's behalf.\r\nfunction repay(uint256 loanId) external {\r\n    Loan storage l = loans[loanId];\r\n    if (l.status != Status.Active) revert NotActive();\r\n    l.status = Status.Repaid;\r\n    asset.safeTransferFrom(msg.sender, address(this), l.debt);\r\n    emit Repaid(loanId, msg.sender, l.debt);\r\n}\r\n\n/// @dev Callback: the collateral price fell below the liquidation threshold.\r\nfunction liquidate(address sender, uint256 loanId) external onlyServiceProvider onlyCallbackSender(sender) {\r\n    Loan storage l = loans[loanId];\r\n    if (l.status != Status.Active) return;\r\n    l.status = Status.Liquidated;\r\n    emit Liquidated(loanId, l.borrower, l.debt);\r\n}\r",
+   "notes": [
+    {
+     "line": 3,
+     "text": "After liquidate() lands, repay() on that loan reverts. A borrower can never repay and also lose the collateral."
+    },
+    {
+     "line": 4,
+     "text": "State is set before the transfer."
+    },
+    {
+     "line": 13,
+     "text": "The seize on Base only follows after Reactive sees this event."
+    }
+   ]
+  },
+  {
+   "id": "poke",
+   "tab": "Poke",
+   "title": "Anyone can unstick a loan",
+   "lead": "A callback can fail, for instance if a destination runs out of callback funds. No keeper is needed to recover.",
+   "contract": "TandemReactive",
+   "file": "contracts/TandemReactive.sol",
+   "from": 140,
+   "to": 153,
+   "text": "/// @notice Re-sends a loan's pending callback if it hasn't been confirmed within RETRY_AFTER.\r\n/// Anyone may call it; destination callbacks are idempotent, so a retry can never double-act.\r\nfunction poke(uint256 id) external {\r\n    Loan storage l = loans[id];\r\n    Status s = l.status;\r\n    if (block.timestamp < l.lastRequest + RETRY_AFTER) revert TooSoon(l.lastRequest + RETRY_AFTER);\r\n    if (s == Status.Pending) _requestDisburse(id, l);\r\n    else if (s == Status.Liquidating) _requestLiquidate(id, l);\r\n    else if (s == Status.Seizing) _requestSeize(id, l);\r\n    else if (s == Status.Releasing) _requestRelease(id, l);\r\n    else if (s == Status.Active && !_healthy(l.collateral, l.debt, price, LIQ_THRESHOLD_BPS)) _startLiquidation(id, l);\r\n    else revert NothingToRetry(s);\r\n    emit Poked(id, s);\r\n}\r",
+   "notes": [
+    {
+     "line": 0,
+     "text": "Only after a minute without an answer, so it cannot be used to spam."
+    },
+    {
+     "line": 8,
+     "text": "Re-sends the pending step. The callbacks are idempotent, so a duplicate does nothing."
+    },
+    {
+     "line": 11,
+     "text": "Healthy and finished loans are left alone."
+    }
+   ]
+  },
+  {
+   "id": "feed",
+   "tab": "Feed",
+   "title": "Spam costs the operator, so it is limited",
+   "lead": "Every price update makes the reactive contract run once, and the operator pays for each run.",
+   "contract": "PriceFeed",
+   "file": "contracts/PriceFeed.sol",
+   "from": 40,
+   "to": 55,
+   "text": "function _post(int256 answer) internal {\r\n    if (latestRound != 0) {\r\n        uint256 next = latestTimestamp + MIN_INTERVAL;\r\n        if (block.timestamp < next) revert TooSoon(next);\r\n        if (answer == latestAnswer) revert NoChange(); // would only cost a reaction\r\n    }\r\n    if (answer < MIN_ANSWER || answer > MAX_ANSWER) revert OutOfBounds(answer);\r\n    int256 prev = latestAnswer;\r\n    if (prev != 0) {\r\n        uint256 diff = uint256(answer > prev ? answer - prev : prev - answer);\r\n        if (diff * 10_000 > uint256(prev) * MAX_MOVE_BPS) revert MoveTooLarge(prev, answer);\r\n    }\r\n    latestAnswer = answer;\r\n    latestTimestamp = block.timestamp;\r\n    emit AnswerUpdated(answer, ++latestRound, block.timestamp);\r\n}\r",
+   "notes": [
+    {
+     "line": 2,
+     "text": "One update per 30 seconds from anyone, which caps the spam at two reactions a minute."
+    },
+    {
+     "line": 4,
+     "text": "An update that changes nothing would only cost a reaction."
+    },
+    {
+     "line": 10,
+     "text": "No more than a 50% move per update."
+    },
+    {
+     "line": 14,
+     "text": "The same event Chainlink's aggregators emit, so a real feed could replace this one."
+    }
+   ]
+  }
+ ],
+ "abi": {
+  "TandemReactive": {
+   "events": [
+    "BorrowApproved(uint256 indexed loanId, uint256 collateral, uint256 debt, uint256 price)",
+    "BorrowRefused(uint256 indexed loanId, uint8 reason)",
+    "Callback(uint256 indexed chainId_, address indexed contract_, uint64 indexed gasLimit_, bytes payload_)",
+    "Configured(address feed, address vault, address pool, uint256 price)",
+    "LiquidationRequested(uint256 indexed loanId, uint256 debt, uint256 price, uint256 seizeAmount)",
+    "LoanFinal(uint256 indexed loanId, uint8 status)",
+    "Poked(uint256 indexed loanId, uint8 status)",
+    "PriceSeen(uint256 indexed round, uint256 price)",
+    "ReleaseRequested(uint256 indexed loanId)",
+    "SeizeRequested(uint256 indexed loanId, uint256 seizeAmount)"
+   ],
+   "functions": [
+    "configure(address feed_, address vault_, address pool_, uint256 initialPrice)",
+    "coverDebt()",
+    "pay(uint256 amount_)",
+    "poke(uint256 id)",
+    "react((uint256 chainId, address contractAddress, uint256 topic0, uint256 topic1, uint256 topic2, uint256 topic3, bytes data, uint256 blockNumber, uint256 opCode, uint256 blockHash, uint256 txHash, uint256 logIndex) log)"
+   ]
+  },
+  "CollateralVault": {
+   "events": [
+    "CollateralLocked(uint256 indexed loanId, address indexed owner, uint256 collateral, uint256 borrowAmount)",
+    "CollateralReleased(uint256 indexed loanId, address indexed owner, uint256 collateral)",
+    "CollateralSeized(uint256 indexed loanId, address indexed owner, uint256 seized, uint256 returned)"
+   ],
+   "functions": [
+    "coverDebt()",
+    "lock(uint256 amount, uint256 borrowAmount) returns (uint256 loanId)",
+    "pay(uint256 amount_)",
+    "release(address sender, uint256 loanId)",
+    "seize(address sender, uint256 loanId, uint256 amount)"
+   ]
+  },
+  "LendingPool": {
+   "events": [
+    "BorrowRejected(uint256 indexed loanId, address indexed borrower, uint256 amount)",
+    "Disbursed(uint256 indexed loanId, address indexed borrower, uint256 amount)",
+    "Liquidated(uint256 indexed loanId, address indexed borrower, uint256 debt)",
+    "Repaid(uint256 indexed loanId, address indexed payer, uint256 amount)"
+   ],
+   "functions": [
+    "coverDebt()",
+    "disburse(address sender, uint256 loanId, address borrower, uint256 amount)",
+    "liquidate(address sender, uint256 loanId)",
+    "pay(uint256 amount_)",
+    "repay(uint256 loanId)"
+   ]
+  },
+  "PriceFeed": {
+   "events": [
+    "AnswerUpdated(int256 indexed current, uint256 indexed roundId, uint256 updatedAt)"
+   ],
+   "functions": [
+    "post(int256 answer)"
+   ]
+  }
+ }
+}

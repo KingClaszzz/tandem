@@ -16,8 +16,19 @@ export const CALLBACK_PROXY = {
 };
 export const LREACT_FAUCET_BASE = "0x2afaFD298b23b62760711756088F75B7409f5967";
 
+/** Lasna rejects a zero priority fee ("gas tip cap 0, minimum needed 1"), which is what its RPC suggests. */
+class LasnaProvider extends ethers.JsonRpcProvider {
+  async getFeeData() {
+    const f = await super.getFeeData();
+    const tip = ethers.parseUnits("1", "gwei");
+    const priority = f.maxPriorityFeePerGas && f.maxPriorityFeePerGas > 0n ? f.maxPriorityFeePerGas : tip;
+    return new ethers.FeeData(f.gasPrice, (f.gasPrice ?? 0n) * 2n + priority, priority);
+  }
+}
+
 export function provider(c: ChainKey) {
-  return new ethers.JsonRpcProvider(CHAINS[c].rpc, CHAINS[c].id, { staticNetwork: true });
+  const P = c === "lasna" ? LasnaProvider : ethers.JsonRpcProvider;
+  return new P(CHAINS[c].rpc, CHAINS[c].id, { staticNetwork: true });
 }
 
 export function wallet(c: ChainKey) {

@@ -1,0 +1,145 @@
+{
+ "at": "2026-11-26T04:38:32.683Z",
+ "deployments": {
+  "reactive": {
+   "chain": "lasna",
+   "address": "0x502F34A50C444DF01308661Dd7Fb4bBf10cDb13a",
+   "tx": "0xcfbfaa6d4f35a181a72880be211e5e604227155acee2af3dad250e1e23d5a041"
+  },
+  "tWETH": {
+   "chain": "base",
+   "address": "0x85B33d8C24E887a65A5759cFC398d99748696f1D",
+   "tx": "0xa6240b75996102eb9bf197ff6a1df4077b9bf44965f8ce5f9b3ea5d162c50507"
+  },
+  "feed": {
+   "chain": "base",
+   "address": "0xb32310246557348B083A863b0B0d581130c1829d",
+   "tx": "0xdb3b351e33dc05e50fce54c610a15dca5442804c60d2e3a2f9d28502ed883264"
+  },
+  "vault": {
+   "chain": "base",
+   "address": "0xf443857bAAf46424B21915aA0958c9688AA59e53",
+   "tx": "0x242aa135bf05a3a4f4e775b729d5c88e1e11bb670829b3015e2442685b48e342"
+  },
+  "tUSD": {
+   "chain": "uni",
+   "address": "0xeA9Ee553A97F671917fADADBCe7B10DCb13Af0Cf",
+   "tx": "0xb071ea750c7a7f529d2351fd66b8809ab8f4e4645ae45977971b3c44ccc6d357"
+  },
+  "pool": {
+   "chain": "uni",
+   "address": "0x0fA40e8E0932AA643385d6A1Cb416945B234feb0",
+   "tx": "0x10970eb74ec49e52fdfb0904c480396ac0959d4c76e9b11fc59a439b916f61af"
+  },
+  "_meta": {
+   "seeded": "0xe7bf28e3aabc472341cb23e2968d9412eee0817e47e51be6c02f5dcfada7445d",
+   "configured": "0x9714927f171fe1a800c0ff2c23406deba0aaa3bfbf534d15e7c5410d024fd20c",
+   "deployedAt": "2026-11-26T04:37:48.419Z"
+  }
+ },
+ "borrow": {
+  "id": "1",
+  "lock": "0x12d07cbf0afb96927bc7c650c3cd262171e516e41940212cf44203bf178dff4c",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "BorrowApproved",
+    "hash": "0x45a8ab5f9a5415257ce7b7a24cfc16fa67a57d6790b892deb0dc7517db447e85",
+    "ms": 2492.4298
+   },
+   {
+    "chain": "uni",
+    "event": "Disbursed",
+    "hash": "0x1721655a729b2535b5531d1632a587a31126838b35621d6271e9c0e83d73f164",
+    "ms": 3535.2469
+   }
+  ]
+ },
+ "repay": {
+  "id": "1",
+  "repay": "0x5b6228c5ff4fe910c799e1134d1454d1eb63f470f1c43e9e6a52e83f013a5954",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "ReleaseRequested",
+    "hash": "0x87c1ff94e02c6cc6b43918ed0538df8fe1892d29201c46f54e7b59c49eb6fe68",
+    "ms": 1706.5580999999984
+   },
+   {
+    "chain": "base",
+    "event": "CollateralReleased",
+    "hash": "0x97ff61d2ab4ab9f96f01296d0538812ca4b8981c157dd81522cd4f405ed5f037",
+    "ms": 1985.3529000000017
+   }
+  ]
+ },
+ "refused": {
+  "id": "2",
+  "lock": "0x7c5390e4e3dfd57fb64fe25c255276c8d6b16cce1b90d8082cc5b886021e97f0",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "BorrowRefused",
+    "hash": "0x3f52a86dcd2da602e859ed2409fbf6a0ab97784e59e8396644f8680ac101c28f",
+    "ms": 1848.1346000000012
+   },
+   {
+    "chain": "base",
+    "event": "CollateralReleased",
+    "hash": "0x31fab0eb84bb63bf352051509e681e1532204600fd73210d15153e82dd4123ce",
+    "ms": 2129.7412000000004
+   }
+  ]
+ },
+ "liquidation": {
+  "borrow": {
+   "id": "3",
+   "lock": "0x6b8e9a5aedad2e8d94f5d8b5a2362ecb4b6554b4bd03c52fec2b5117f7ee90a3",
+   "steps": [
+    {
+     "chain": "lasna",
+     "event": "BorrowApproved",
+     "hash": "0x0d88bde5d5484db8797bbfe95d09cc376ea90652f366a094ca996d02a8c7c40d",
+     "ms": 1502.1926999999996
+    },
+    {
+     "chain": "uni",
+     "event": "Disbursed",
+     "hash": "0x1ef1338e3adb15e452cf7f4603f4b46d1aebf9675adbfda597992999ec6fce55",
+     "ms": 4262.6774000000005
+    }
+   ]
+  },
+  "price": "0x75dfc450d68a53753e881289dc9cd089aecf784a6e051e9211687499ed691d75",
+  "steps": [
+   {
+    "chain": "lasna",
+    "event": "LiquidationRequested",
+    "hash": "0x37534e028f5bbb07fe2e7ed34abb6177da23fa23d2b14d2fae04fe36858505e1",
+    "ms": 1091.6932000000052
+   },
+   {
+    "chain": "uni",
+    "event": "Liquidated",
+    "hash": "0x6cff04df59789d6b65c3d5196e2b7b56afdd97d59b2766f6ce4659e27467fa1f",
+    "ms": 2396.7861999999986
+   },
+   {
+    "chain": "lasna",
+    "event": "SeizeRequested",
+    "hash": "0x6683ddf223df1d2737e66303b7841a96e85c5c73b5aec2105925332349913eb9",
+    "ms": 2764.072900000003
+   },
+   {
+    "chain": "base",
+    "event": "CollateralSeized",
+    "hash": "0x4871efe12c9e63ffbeae16b2ed101cf74d4f06ebe6d5874316082ce6af9812e7",
+    "ms": 3041.493200000001
+   }
+  ]
+ },
+ "rcFinalStatus": {
+  "1": 6,
+  "3": 7
+ }
+}

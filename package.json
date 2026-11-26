@@ -8,7 +8,14 @@
     "get-lreact": "ts-node scripts/get-lreact.ts",
     "deploy": "ts-node scripts/deploy.ts",
     "typecheck": "tsc --noEmit",
-    "bench": "ts-node scripts/bench.ts"
+    "bench": "ts-node scripts/bench.ts",
+    "bridge-uni": "ts-node scripts/bridge-uni.ts",
+    "smoke": "ts-node scripts/smoke.ts",
+    "status": "ts-node scripts/status.ts",
+    "verify": "ts-node scripts/verify.ts",
+    "publish": "ts-node scripts/publish.ts",
+    "guard": "ts-node scripts/guard.ts",
+    "set-price": "ts-node scripts/set-price.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",

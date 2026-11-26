@@ -6,12 +6,13 @@ import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.s
 import { AbstractCallback } from "./reactive-lib/base/AbstractCallback.sol";
 import { IPayable } from "./reactive-lib/interfaces/IPayable.sol";
 
-/// @notice Unichain Sepolia side. Source of truth for loan state: once a loan is liquidated here,
-/// it can no longer be repaid, so a borrower can never both repay and lose collateral.
+/// @notice Unichain Sepolia side and the source of truth for debt. Once a loan is liquidated here it
+/// can no longer be repaid, so a borrower can never both repay and lose collateral. Callbacks are
+/// idempotent: disburse only from None, liquidate only from Active.
 contract LendingPool is AbstractCallback {
     using SafeERC20 for IERC20;
 
-    enum Status { None, Active, Repaid, Liquidated }
+    enum Status { None, Active, Repaid, Liquidated, Rejected }
 
     struct Loan {
         address borrower;
@@ -42,8 +43,12 @@ contract LendingPool is AbstractCallback {
         onlyServiceProvider
         onlyCallbackSender(sender)
     {
-        if (loans[loanId].status != Status.None) return;
-        if (asset.balanceOf(address(this)) < amount) {
+        Loan storage l = loans[loanId];
+        if (l.status != Status.None) return;
+        if (amount == 0 || amount > type(uint128).max || asset.balanceOf(address(this)) < amount) {
+            // Final: a retried disburse must never succeed after the collateral has been released.
+            l.borrower = borrower;
+            l.status = Status.Rejected;
             emit BorrowRejected(loanId, borrower, amount);
             return;
         }
@@ -52,7 +57,7 @@ contract LendingPool is AbstractCallback {
         emit Disbursed(loanId, borrower, amount);
     }
 
-    /// @notice Repay a loan in full (anyone may repay on the borrower's behalf).
+    /// @notice Repay a loan in full. Anyone may repay on the borrower's behalf.
     function repay(uint256 loanId) external {
         Loan storage l = loans[loanId];
         if (l.status != Status.Active) revert NotActive();
@@ -69,6 +74,11 @@ contract LendingPool is AbstractCallback {
         emit Liquidated(loanId, l.borrower, l.debt);
     }
 
+    function liquidity() external view returns (uint256) {
+        return asset.balanceOf(address(this));
+    }
+
+    /// @notice Pays any outstanding callback debt from this contract's ETH balance. Anyone may call.
     function coverDebt() external {
         _coverDebt();
     }
