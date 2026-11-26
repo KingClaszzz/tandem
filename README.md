@@ -343,3 +343,5 @@ Notes for anyone else building on Omni. Some of these cost us an hour.
 The idea, the design decisions and the review were the author's. The code was written together with an AI coding assistant (Claude Code), which wrote most of the Solidity, scripts and web app under the author's direction. The author funded and ran the testnet wallet steps and pushes the code. The design came before the code: [`docs/DESIGN.md`](docs/DESIGN.md) was written first and the contracts were then built to match it, with tests for each rule.
 
 The contracts are MIT licensed (see [`LICENSE`](LICENSE)). `contracts/reactive-lib/` is vendored from Reactive's `reactive-lib-omni` and keeps its upstream terms.
+
+Build By Arlor
